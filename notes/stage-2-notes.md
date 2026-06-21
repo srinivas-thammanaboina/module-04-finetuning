@@ -48,11 +48,18 @@ honest refusal — it genuinely has no revenue figure to cite).
   text}` — the same shape we assemble at generation/inference time.
 - TSLA never appears in this file (train-side seeds only).
 
-## Sanity-check experiment (to fill in)
+## Sanity-check experiment (done)
 
-- Prompt 2.2 dry run: generate ~30 examples, read 5 (incl. a refusal), check the
-  questions are answerable from the given chunks, citations are real ids, refusals
-  are genuinely unanswerable. [pending]
+- **Dry run (30):** read 6 across types incl. a refusal — all honestly
+  answerable/unanswerable, real citations, first-person refusal. Recipe approved.
+- **Full run (200 train + 40 TSLA eval):** types on target, 20% refusals in both,
+  citation-valid 200/200 and 40/40. Read 3 TSLA eval examples — high quality.
+- **Leakage check PASS.** Train references only AAPL/NVDA; eval only TSLA.
+  - *Lesson (Rule 4):* the checker first false-flagged "AAPL: 40" in eval — exactly
+    1 per example. That uniformity revealed it was scanning the boilerplate SYSTEM
+    prompt, which contains an illustrative `[AAPL-2025-10-31-0000]` in the rules.
+    Fixed to scan only `meta.chunk_ids` + user/assistant text. The data was always
+    clean; the *checker* had the bug. Looking at the actual artifact found it fast.
 
 ## Future experiments queue
 

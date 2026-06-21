@@ -7,15 +7,13 @@ _Last updated: 2026-06-20_
 
 ## Where I am
 
-**Stage 0, 1, Stage 2 Prompts 2.1 + 2.2 DONE.** Dry run (30) reviewed and
-approved — high quality, honest Q/A + refusals, per-claim citation kept. Prompt
-2.3 scripts written (eval gen, leakage check, SPLIT.md). Next up: **I run the
-full train (200) + eval (40) + leakage check; we review + close Stage 2.**
+**Stage 2 COMPLETE.** `data/train.jsonl` (200) + `data/eval.jsonl` (40, TSLA) +
+`data/SPLIT.md` done. Leakage check PASSED ✅ (no TSLA in train). Dataset quality
+reviewed at dry-run and full-run gates — honest Q/A, 20% refusals, valid citations.
 
-> ACTION ON ME (user): venv active, then run in order:
->   1. `python3 scripts/generate_dataset.py --n 200 --out data/train.jsonl`
->   2. `python3 scripts/generate_eval.py --n 40 --out data/eval.jsonl`
->   3. `python3 scripts/check_leakage.py`   (must print PASSED ✅ before training)
+Next up: **Stage 3 — baseline capture.** Run the UNTUNED Llama-3.2-3B on the TSLA
+eval set via Ollama and save the "before" outputs (no scoring yet). Whiteboard
+first. I run it (Ollama).
 
 ## Done so far
 

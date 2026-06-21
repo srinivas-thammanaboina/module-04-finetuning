@@ -41,8 +41,16 @@ so all eval comparisons are within the TSLA filing).
 appears anywhere in `train.jsonl` — checking both the structured `meta.chunk_ids`
 and a raw text scan of each line. No training happens until this passes.
 
-## Actuals (fill in from the run output)
+## Actuals (from the run, seed 42)
 
-- train.jsonl: ___ examples — by ticker: ___ — refusals: ___%
-- eval.jsonl: ___ examples (TSLA only) — refusals: ___%
-- Leakage check: ___ (PASS/FAIL)
+- **train.jsonl: 200 examples.** By example ticker: AAPL 59, NVDA 134, cross-company
+  (AAPL+NVDA) 7. NVDA-heavy because it has 278 source chunks vs AAPL's 149 —
+  uniform sampling favors it; fine for a FORMAT finetune. Types on target
+  (factual 60 / about_x 50 / refusal 40 / comparison 30 / numeric 20).
+  **Refusals: 40/200 = 20%.** Citation-valid: 200/200.
+- **eval.jsonl: 40 examples (TSLA only).** Types on target; **refusals 8/40 = 20%**;
+  citation-valid 40/40.
+- **Leakage check: PASS ✅** — train references only AAPL/NVDA real chunks; eval
+  references only TSLA. (First run threw a false positive because the checker
+  scanned the boilerplate system prompt, which contains an illustrative
+  `[AAPL-...]` citation; fixed to scan only meta.chunk_ids + user/assistant text.)
