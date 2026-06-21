@@ -1,0 +1,4 @@
+# Local Python deps for module-04 (dataset generation + eval).
+# Heavy training deps (transformers/peft/trl/bitsandbytes) live in Colab, NOT here.
+anthropic>=0.40
+python-dotenv>=1.0

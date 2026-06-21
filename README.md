@@ -35,4 +35,3 @@ only does well on AAPL/NVDA content, it *memorized*. A leakage check enforces th
 
 See `config.py` for paths and constants, and `project-build-prompts.md` for the
 full staged build.
-# module-04-finetuning
